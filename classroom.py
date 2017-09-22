@@ -20,14 +20,7 @@ def scheduleRooms(rooms,cls):
         if empty:
             break
         clss = classList.pop()
-        if len(pQ) is 0:
-            if(len(rooms) is 0):
-                empty = True 
-                continue
-            room = rooms.pop()
-            heappush(pQ, [cls[clss][1], room])
-            rmassign[room] = [clss]
-        elif pQ[0][0] <= cls[clss][0]:
+        if len(pQ) != 0 and pQ[0][0] <= cls[clss][0]:
             room = heappop(pQ)[1]
             rmassign[room].append(clss)
             heappush(pQ, [cls[clss][1], room])
