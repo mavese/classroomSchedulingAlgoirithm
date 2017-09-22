@@ -12,7 +12,13 @@ def scheduleRooms(rooms,cls):
     If there are not enough rooms to hold the classes, return 'Not enough rooms'.
     """
     rmassign = {}
-    rooms = []
+    classList = list(sorted(cls,key=cls.get), reverse=True)    
+    pQ = []
+    heapify(pQ)
+    for i in xrange(len(cls)):
+    	clss = classList.pop()
+    	if len(pQ) is 0:
+    		heappush(list(rooms.pop(), cls))#finish
     return rmassign
 
 if __name__=="__main__":
