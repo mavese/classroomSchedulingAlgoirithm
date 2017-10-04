@@ -12,19 +12,24 @@ def scheduleRooms(rooms,cls):
     If there are not enough rooms to hold the classes, return 'Not enough rooms'.
     """
     rmassign = {}
+    #get a sorted list based on start time
     classList = list(sorted(cls,key=cls.get, reverse=True))   
+    #create priority queue
     pQ = []
+    #set boolean value empty to false to use to find difference between not enough rooms and normal ending loop
     empty = False
     heapify(pQ)
     for i in xrange(len(cls)):
         if empty:
             break
         clss = classList.pop()
+        #short circuiting and so it doesn't give error when run for the first time. ie order matters for this statement
         if len(pQ) != 0 and pQ[0][0] <= cls[clss][0]:
             room = heappop(pQ)[1]
             rmassign[room].append(clss)
             heappush(pQ, [cls[clss][1], room])
         else:
+            #if there are no more rooms but still classes left to place
             if(len(rooms) is 0): 
                 empty = True
                 continue
